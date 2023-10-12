@@ -1,5 +1,5 @@
 blueprint:
-  name: Encender Bombilla con Brillo Incremental
+  name: Prego - Encender Bombilla con Brillo Incremental
   description: Enciende una bombilla e incrementa gradualmente su brillo hasta llegar al 40%.
   domain: automation
   input:
