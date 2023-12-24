@@ -10,6 +10,9 @@ blueprint:
       selector:
         entity:
           domain: binary_sensor
+    sunrise_offset:
+      name: Sunrise offset
+      description: Define offset to sunrise
     in_away_from_home:
       name: Are you away from home?
       description: Entity that defines if you are away from home
@@ -39,12 +42,19 @@ trigger:
      to: 'on'
  - platform: sun
     event: sunset
-    offset: "-01:00:00"
+    offset: !input sunrise_offset
 
 condition:
   - condition: state
     entity_id: !input 'in_entity_switch'
     state: 'off'
+  - condition: sun
+    before: sunrise
+    before_offset: !input sunrise_offset
+  - type: is_occupied
+    entity_id: !input 'in_motion_sensor'
+    condition: device
+    domain: binary_sensor
   - condition: state
     entity_id: !input 'in_away_from_home'
     state: 'off'
