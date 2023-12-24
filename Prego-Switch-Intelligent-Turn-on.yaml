@@ -11,8 +11,16 @@ blueprint:
         entity:
           domain: binary_sensor
     sunrise_offset:
-      name: Sunrise offset
+      name: Offset to turn off lights
       description: Define offset to sunrise
+      default: 45
+      selector:
+        number:
+          min: -2400.0
+          max: 240.0
+          unit_of_measurement: minutes
+          mode: slider
+          step: 1.0
     in_away_from_home:
       name: Are you away from home?
       description: Entity that defines if you are away from home
