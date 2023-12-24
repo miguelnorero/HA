@@ -1,5 +1,5 @@
 blueprint:
-  name: Prego - Turn switch on - By Intelligent v1.5
+  name: Prego - Turn switch on - By Intelligent v1.6
   description: When detecting movement and verifying that the variables delivered are false. The light turns on
   domain: automation
 
