@@ -37,9 +37,9 @@ blueprint:
 #---------------
 
 trigger:
- - platform: state
-     entity_id: !input 'in_motion_sensor'
-     to: 'on'
+ - type: is_occupied
+    platform: device
+    entity_id: !input 'in_motion_sensor'
  - platform: sun
     event: sunset
     offset: !input sunrise_offset
