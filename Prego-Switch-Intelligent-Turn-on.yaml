@@ -1,5 +1,5 @@
 blueprint:
-  name: Prego - Turn switch on - By Intelligent v1.3
+  name: Prego - Turn switch on - By Intelligent v1.4
   description: When detecting movement and verifying that the variables delivered are false. The light turns on
   domain: automation
 
@@ -53,10 +53,9 @@ condition:
   - condition: state
     entity_id: !input 'in_entity_switch'
     state: 'off'
-  - type: is_occupied
-    entity_id: !input 'in_motion_sensor'
-    condition: device
-    domain: binary_sensor
+  - condition: sun
+    before: sunrise
+    before_offset: !input sunrise_offset
   - condition: state
     entity_id: !input 'in_away_from_home'
     state: 'off'
