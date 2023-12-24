@@ -1,5 +1,5 @@
 blueprint:
-  name: Prego - Turn switch on - By Intelligent v1.4
+  name: Prego - Turn switch on - By Intelligent v1.5
   description: When detecting movement and verifying that the variables delivered are false. The light turns on
   domain: automation
 
@@ -31,14 +31,8 @@ blueprint:
     sunrise_offset:
       name: Offset to turn off lights
       description: Define offset to sunrise
-      default: 45
       selector:
-        number:
-          min: -2400.0
-          max: 240.0
-          unit_of_measurement: minutes
-          mode: slider
-          step: 1.0
+        time:
 
 #---------------
 # Automatizacion para enceder la luz al detectar movimiento.
@@ -48,6 +42,9 @@ trigger:
   - platform: state
     entity_id: !input 'in_motion_sensor'
     to: 'on'
+  - platform: sun
+    event: sunset
+    offset: !input sunrise_offset
 
 condition:
   - condition: state
