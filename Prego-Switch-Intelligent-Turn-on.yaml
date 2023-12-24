@@ -1,5 +1,5 @@
 blueprint:
-  name: Prego - Turn switch on - By Intelligent v1.0
+  name: Prego - Turn switch on - By Intelligent v1.1
   description: When detecting movement and verifying that the variables delivered are false. The light turns on
   domain: automation
 
@@ -10,17 +10,6 @@ blueprint:
       selector:
         entity:
           domain: binary_sensor
-    sunrise_offset:
-      name: Offset to turn off lights
-      description: Define offset to sunrise
-      default: 45
-      selector:
-        number:
-          min: -2400.0
-          max: 240.0
-          unit_of_measurement: minutes
-          mode: slider
-          step: 1.0
     in_away_from_home:
       name: Are you away from home?
       description: Entity that defines if you are away from home
@@ -39,18 +28,29 @@ blueprint:
       selector:
         entity:
           domain: switch
+    sunrise_offset:
+      name: Offset to turn off lights
+      description: Define offset to sunrise
+      default: 45
+      selector:
+        number:
+          min: -2400.0
+          max: 240.0
+          unit_of_measurement: minutes
+          mode: slider
+          step: 1.0
 
 #---------------
 # Automatizacion para enceder la luz al detectar movimiento.
 #---------------
 
 trigger:
- - platform: state
+  - platform: state
     entity_id: !input 'in_motion_sensor'
     to: 'on'
- - platform: sun
+  - platform: sun
     event: sunset
-    offset: !input sunrise_offset
+    offset: "01:00:00"
 
 condition:
   - condition: state
